@@ -1,4 +1,5 @@
-# RetrofitRssConverterFactory
+# Retrofit2 Rss Converter Factory [![Status](https://travis-ci.org/faruktoptas/RetrofitRssConverterFactory.svg?branch=master)](https://travis-ci.org/faruktoptas/RetrofitRssConverterFactory) [![API](https://img.shields.io/badge/API-10%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=10)
+
 A Retrofit2 converter which parses Rss feeds.
 
 ## Sample Usage
