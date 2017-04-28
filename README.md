@@ -2,6 +2,27 @@
 
 A Retrofit2 converter which parses Rss feeds.
 
+# Gradle Dependency
+
+Add this in your root `build.gradle` file (**not** your module `build.gradle` file):
+
+```gradle
+allprojects {
+	repositories {
+		...
+		maven { url "https://jitpack.io" }
+	}
+}
+```
+
+Then, add the library to your module `build.gradle`
+```gradle
+dependencies {
+    compile 'com.github.faruktoptas:RetrofitRssConverterFactory:latest.release.here'
+}
+```
+
+
 ## Sample Usage
 ```java
 public interface RssService {
