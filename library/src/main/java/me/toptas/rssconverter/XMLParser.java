@@ -26,6 +26,7 @@ class XMLParser extends DefaultHandler {
     private boolean mParsingTitle = false;
     private boolean mParsingDescription = false;
     private boolean mParsingLink = false;
+    private boolean mParsingSpecialValue = false;
 
     private String mElementValue = null;
     private String mTitle = sEmptyString;
@@ -66,6 +67,11 @@ class XMLParser extends DefaultHandler {
                     mParsingLink = true;
                     mLink = sEmptyString;
                 }
+                break;
+            case sPublishDate:
+            case sUrl:
+            case sImage:
+                mParsingSpecialValue = true;
                 break;
         }
         /*if (localName.equals(sItem)) {
@@ -125,12 +131,16 @@ class XMLParser extends DefaultHandler {
                     break;
                 case sImage:
                 case sUrl:
+                    mParsingSpecialValue = false;
                     if (mElementValue != null && !mElementValue.isEmpty()) {
                         mImage = mElementValue;
+                        mElementValue = sEmptyString;
                     }
                     break;
                 case sPublishDate:
+                    mParsingSpecialValue = false;
                     mDate = mElementValue;
+                    mElementValue = sEmptyString;
                     break;
                 case sDescription:
                     mParsingDescription = false;
@@ -145,6 +155,10 @@ class XMLParser extends DefaultHandler {
     public void characters(char[] ch, int start, int length)
             throws SAXException {
         String buff = new String(ch, start, length);
+        if (mParsingSpecialValue) {
+            mElementValue = mElementValue + buff;
+            return;
+        }
         if (mElementOn) {
             if (buff.length() > 2) {
                 mElementValue = buff;
