@@ -1,6 +1,7 @@
 package me.toptas.rssconverter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Model for Rss Item
@@ -12,7 +13,7 @@ public class RssItem implements Serializable {
     private String mImage;
     private String mPublishDate;
     private String mDescription;
-
+    private List<RssEnclosure> mEnclosures;
 
     public String getTitle() {
         return mTitle;
@@ -53,6 +54,15 @@ public class RssItem implements Serializable {
     public void setDescription(String description) {
         this.mDescription = description;
     }
+
+    public List<RssEnclosure> getEnclosures() {
+        return mEnclosures;
+    }
+
+    public void setEnclosures(List<RssEnclosure> enclosures) {
+        this.mEnclosures = enclosures;
+    }
+
 
 
     @Override
