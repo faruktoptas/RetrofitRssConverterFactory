@@ -65,6 +65,11 @@ class RssItemsAdapter extends RecyclerView.Adapter<RssItemsAdapter.ViewHolder> {
         final RssItem item = mItems.get(position);
         holder.textTitle.setText(item.getTitle());
         holder.textPubDate.setText(item.getPublishDate());
+        if (item.getEnclosures().size() > 0) {
+            holder.textEnclosure.setText(item.getEnclosures().get(0).getLink());
+        } else {
+            holder.textEnclosure.setVisibility(View.GONE);
+        }
 
         if (item.getImage() != null) {
             Picasso.with(mContext).load(item.getImage()).
@@ -100,6 +105,9 @@ class RssItemsAdapter extends RecyclerView.Adapter<RssItemsAdapter.ViewHolder> {
 
         @BindView(R.id.tvPubDate)
         TextView textPubDate;
+
+        @BindView(R.id.tvEnclosure)
+        TextView textEnclosure;
 
         @BindView(R.id.ivThumb)
         ImageView imageThumb;
