@@ -5,6 +5,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * RSS Feed XML parser
@@ -21,6 +22,7 @@ class XMLParser extends DefaultHandler {
     private static final String sUrl = "url";
     private static final String sImage = "image";
     private static final String sPublishDate = "pubdate";
+    private static final String sEnclosure = "enclosure";
 
     private boolean mElementOn = false;
     private boolean mParsingTitle = false;
@@ -33,6 +35,7 @@ class XMLParser extends DefaultHandler {
     private String mImage;
     private String mDate;
     private String mDescription;
+    private List<RssEnclosure> mEnclosures;
 
     private RssItem mRssItem;
     private final ArrayList<RssItem> mRssItems;
@@ -50,6 +53,7 @@ class XMLParser extends DefaultHandler {
         switch (localName.toLowerCase()) {
             case sItem:
                 mRssItem = new RssItem();
+                mEnclosures = new ArrayList<>();
                 break;
             case sTitle:
                 if (!qName.contains(sMedia)) {
@@ -66,6 +70,13 @@ class XMLParser extends DefaultHandler {
                     mParsingLink = true;
                     mLink = sEmptyString;
                 }
+                break;
+            case sEnclosure:
+                RssEnclosure enclosure = new RssEnclosure();
+                enclosure.setLink(attributes.getValue(0));
+                enclosure.setLength(attributes.getValue(1));
+                enclosure.setType(attributes.getValue(2));
+                mEnclosures.add(enclosure);
                 break;
         }
         /*if (localName.equals(sItem)) {
@@ -104,6 +115,7 @@ class XMLParser extends DefaultHandler {
                     if (mImage == null && mDescription != null && getImageSourceFromDescription(mDescription) != null) {
                         mRssItem.setImage(getImageSourceFromDescription(mDescription));
                     }
+                    mRssItem.setEnclosures(mEnclosures);
                     mRssItems.add(mRssItem);
                     mLink = sEmptyString;
                     mImage = null;

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardview"
     style="@style/SelectableBackground"
     android:layout_width="fill_parent"
@@ -53,6 +51,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvTitle"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvEnclosure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPubDate"
                 android:layout_marginTop="5dp"
                 android:fontFamily="sans-serif-light"
                 android:textColor="#ffffff"
