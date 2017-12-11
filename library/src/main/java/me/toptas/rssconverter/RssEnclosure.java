@@ -3,7 +3,7 @@ package me.toptas.rssconverter;
 import java.io.Serializable;
 
 /**
- * Model for Rss Item
+ * Model for Rss Enclosure
  */
 public class RssEnclosure implements Serializable {
     private String mType;

@@ -73,9 +73,19 @@ class XMLParser extends DefaultHandler {
                 break;
             case sEnclosure:
                 RssEnclosure enclosure = new RssEnclosure();
-                enclosure.setLink(attributes.getValue(0));
-                enclosure.setLength(attributes.getValue(1));
-                enclosure.setType(attributes.getValue(2));
+                for (int i = 0; i < attributes.getLength(); i++) {
+                    switch (attributes.getLocalName(i)) {
+                        case "type":
+                            enclosure.setType(attributes.getValue(i));
+                            break;
+                        case "url":
+                            enclosure.setLink(attributes.getValue(i));
+                            break;
+                        case "length":
+                            enclosure.setLength(attributes.getValue(i));
+                            break;
+                    }
+                }
                 mEnclosures.add(enclosure);
                 break;
         }
