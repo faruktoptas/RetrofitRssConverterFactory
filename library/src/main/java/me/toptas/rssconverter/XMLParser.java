@@ -68,18 +68,7 @@ class XMLParser extends DefaultHandler {
                 }
                 break;
         }
-        /*if (localName.equals(sItem)) {
-            mRssItem = new RssItem();
-        } else if (localName.equalsIgnoreCase(sTitle) && !qName.contains(sMedia)) {
-            mParsingTitle = true;
-            mTitle = sEmptyString;
-        } else if (localName.equalsIgnoreCase(sDescription)) {
-            mParsingDescription = true;
-            mDescription = sEmptyString;
-        } else if (localName.equalsIgnoreCase(sLink) && !qName.equals(sAtomLink)) {
-            mParsingLink = true;
-            mLink = sEmptyString;
-        }*/
+
         if (attributes != null) {
             String url = attributes.getValue(sUrl);
             if (url != null && !url.isEmpty()) {

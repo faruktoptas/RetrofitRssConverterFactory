@@ -17,7 +17,7 @@ public class RssFeed {
         return mItems;
     }
 
-    void setItems(List<RssItem> items) {
+    public void setItems(List<RssItem> items) {
         mItems = items;
     }
 }

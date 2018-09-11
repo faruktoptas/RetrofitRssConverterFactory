@@ -18,7 +18,7 @@ allprojects {
 Then, add the library to your module `build.gradle`
 ```gradle
 dependencies {
-    compile 'com.github.faruktoptas:RetrofitRssConverterFactory:latest.release.here'
+    implementation 'com.github.faruktoptas:RetrofitRssConverterFactory:0.0.3'
 }
 ```
 
