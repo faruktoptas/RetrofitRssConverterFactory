@@ -18,43 +18,36 @@ allprojects {
 Then, add the library to your module `build.gradle`
 ```gradle
 dependencies {
-    implementation 'com.github.faruktoptas:RetrofitRssConverterFactory:0.0.3'
+    implementation 'com.github.faruktoptas:RetrofitRssConverterFactory:0.1.0'
 }
 ```
 
 
 ## Sample Usage
-```java
-public interface RssService {
-    /**
-     * No baseUrl defined. Each RSS Feed will be consumed by it's Url
-     * @param url RSS Feed Url
-     * @return Retrofit Call
-     */
+```kotlin
+interface RssService {
     @GET
-    Call<RssFeed> getRss(@Url String url);
+    fun getRss(@Url url: String): Call<RssFeed>
 }
 ```
 
 ```java
-Retrofit retrofit = new Retrofit.Builder()
+val retrofit = Retrofit.Builder()
         .baseUrl("https://github.com")
         .addConverterFactory(RssConverterFactory.create())
-        .build();
+        .build()
 
-RssService service = retrofit.create(RssService.class);
+val service = retrofit.create(RssService::class.java)
 service.getRss("RSS_FEED_URL")
-        .enqueue(new Callback<RssFeed>() {
-            @Override
-            public void onResponse(Call<RssFeed> call, Response<RssFeed> response) {
+        .enqueue(object : Callback<RssFeed> {
+            override fun onResponse(call: Call<RssFeed>, response: Response<RssFeed>) {
                 // Populate list with response.body().getItems()
             }
 
-            @Override
-            public void onFailure(Call<RssFeed> call, Throwable t) {
+            override fun onFailure(call: Call<RssFeed>, t: Throwable) {
                 // Show failure message
             }
-        });
+        })
 ```
 
 ## Contribute
