@@ -41,7 +41,7 @@ internal class RssItemsAdapter(private val listener: OnItemClickListener) : Recy
         val item = itemList[position]
         holder.apply {
             textTitle.text = item.title
-            textPubDate.text = item.publishDate
+            textPubDate.text = item.publishDate?.toString()
 
             if (item.image != null) {
                 Picasso.get()

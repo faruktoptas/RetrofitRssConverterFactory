@@ -1,6 +1,7 @@
 package me.toptas.rssconverter
 
 import java.io.Serializable
+import java.util.Date
 
 /**
  * Model for Rss Item
@@ -16,7 +17,7 @@ class RssItem : Serializable {
             field = link?.trim { it <= ' ' }
         }
     var image: String? = null
-    var publishDate: String? = null
+    var publishDate: Date? = null
     var description: String? = null
 
 
