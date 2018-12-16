@@ -1,12 +1,13 @@
 package me.toptas.rssconverter
 
 import android.util.Log
+import org.pojava.datetime.DateTime
+import org.pojava.datetime.DateTimeConfig
 import org.xml.sax.Attributes
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
+import java.lang.Exception
+import java.util.Date
 
 /**
  * RSS Feed XML parser
@@ -94,10 +95,8 @@ internal class XMLParser : DefaultHandler() {
                 }
                 PUBLISH_DATE -> date = elementValue?.let {
                     try{
-                        SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss",
-                                Locale(Locale.getDefault().displayLanguage))
-                                .parse(it)
-                    }catch (e: ParseException){
+                        DateTime.parse(it, DateTimeConfig.getGlobalDefault()).toDate()
+                    }catch (e: Exception){
                         Log.i(XMLParser::class.java.simpleName, "Careful! ${e}")
                         null
                     }
