@@ -12,7 +12,8 @@ env:
   - QEMU_AUDIO_DRV=none
   - TERM=dumb
   matrix:
-    - EMULATOR_API=28
+    - EMULATOR_API=16
+    - EMULATOR_API=19
 
 install:
   - export ANDROID_HOME=~/android-sdk-linux
