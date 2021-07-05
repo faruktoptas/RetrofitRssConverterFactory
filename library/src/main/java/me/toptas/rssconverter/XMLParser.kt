@@ -1,8 +1,13 @@
 package me.toptas.rssconverter
 
+import android.util.Log
+import org.pojava.datetime.DateTime
+import org.pojava.datetime.DateTimeConfig
 import org.xml.sax.Attributes
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
+import java.lang.Exception
+import java.util.Date
 
 /**
  * RSS Feed XML parser
@@ -18,7 +23,7 @@ internal class XMLParser : DefaultHandler() {
     private var title = EMPTY_STRING
     private var link: String? = null
     private var image: String? = null
-    private var date: String? = null
+    private var date: Date? = null
     private var description: String? = null
 
     private var rssItem: RssItem? = null
@@ -73,7 +78,7 @@ internal class XMLParser : DefaultHandler() {
                     }
                     link = EMPTY_STRING
                     image = null
-                    date = EMPTY_STRING
+                    date = null
                 }
                 TITLE -> if (!qName.contains(MEDIA)) {
                     parsingTitle = false
@@ -88,7 +93,14 @@ internal class XMLParser : DefaultHandler() {
                 IMAGE, URL -> if (elementValue != null && elementValue?.isNotEmpty() == true) {
                     image = elementValue
                 }
-                PUBLISH_DATE -> date = elementValue
+                PUBLISH_DATE -> date = elementValue?.let {
+                    try{
+                        DateTime.parse(it, DateTimeConfig.getGlobalDefault()).toDate()
+                    }catch (e: Exception){
+                        Log.i(XMLParser::class.java.simpleName, "Careful! ${e}")
+                        null
+                    }
+                }
                 DESCRIPTION -> {
                     parsingDescription = false
                     elementValue = EMPTY_STRING
